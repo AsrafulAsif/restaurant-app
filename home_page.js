@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
+
+    const authToken = () => {
+        return localStorage.getItem('authToken');
+    };
+
+    if (!authToken()) {
+        // If auth token exists, redirect to the dashboard
+        window.location.href = "login_page.html";
+        return;  // Stop further execution of the script
+    }
+
+
     const sidebarItems = document.querySelectorAll('.sidebar-item');
     const sections = document.querySelectorAll('.section');
     let activeItem = sidebarItems[0];  
