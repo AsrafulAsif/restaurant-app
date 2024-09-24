@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Check if the user is already logged in
     if (authToken()) {
         // If auth token exists, redirect to the dashboard
-        window.location.href = "home_page.html";
+        window.location.href = "/homePage/home_page.html";
         return;  // Stop further execution of the script
     }
 
@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Check if token is present and redirect
             if (authToken()) {
-                window.location.href = "home_page.html";  // Redirect to the dashboard
+                window.location.href = "/homePage/home_page.html";  // Redirect to the dashboard
             } else {
                 console.error('Auth token is missing or invalid');
             }

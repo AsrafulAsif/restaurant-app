@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!authToken()) {
         // If auth token exists, redirect to the dashboard
-        window.location.href = "login_page.html";
+        window.location.href = "/loginPage/login_page.html";
         return;  // Stop further execution of the script
     }
 
@@ -65,6 +65,12 @@ document.addEventListener("DOMContentLoaded", () => {
         item.addEventListener('click', () => {
             activeSidebarWithContent(index);
         });
+    });
+
+
+    document.querySelector('.sidebar-logout').addEventListener('click',()=>{
+        localStorage.removeItem('authToken');
+        window.location.href = '/loginPage/login_page.html';
     });
 
     // API calls for each section
