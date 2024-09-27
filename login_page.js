@@ -1,15 +1,9 @@
-document.addEventListener("DOMContentLoaded", () => {
-    // Function to get the auth token from localStorage
-    const authToken = () => {
-        return localStorage.getItem('authToken');
-    };
+import {authToken,redirectIfLoggedIn} from './local_storage.js';
+import { postApiCall } from './api_hendler.js';
 
-    // Check if the user is already logged in
-    if (authToken()) {
-        // If auth token exists, redirect to the dashboard
-        window.location.href = "index.html";
-        return;  // Stop further execution of the script
-    }
+document.addEventListener("DOMContentLoaded", () => {
+
+    if (redirectIfLoggedIn("index.html")) return;
 
     // Proceed with login if not already logged in
     document.getElementById('submitBtn').addEventListener('click', async () => {
@@ -19,7 +13,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (userName === '' || userPassword === '') {
             alert('Enter user name or password.');
         } else {
-            let data = await login(userName, userPassword);
+
+            const url = 'http://localhost:8080/api/v1/auth/login';
+
+            const request = {
+                userName: userName,
+                password: userPassword
+            };
+    
+
+            let data = await postApiCall(url,'POST',request);
 
             if (data && data.data && data.data.token) {
                 console.log(data.data.token);  // Log the token (optional)
@@ -30,14 +33,15 @@ document.addEventListener("DOMContentLoaded", () => {
             if (authToken()) {
                 window.location.href = "index.html";  // Redirect to the dashboard
             } else {
-                console.error('Auth token is missing or invalid');
+                // console.error('Auth token is missing or invalid');
+                return;
             }
         }
     });
 
     // Function to handle login request
     const login = async (userName, userPassword) => {
-        const url = 'https://rms-starter.onrender.com/api/v1/auth/login';
+        const url = 'http://localhost:8080/api/v1/auth/login';
 
         const request = {
             userName: userName,

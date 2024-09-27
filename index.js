@@ -1,8 +1,11 @@
+import { authToken,redirectIfLoggedIn } from "./local_storage.js";
+import { getApiCall } from "./api_hendler.js";
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    const authToken = () => {
-        return localStorage.getItem('authToken');
-    };
+    // const authToken = () => {
+    //     return localStorage.getItem('authToken');
+    // };
 
     if (!authToken()) {
         // If auth token exists, redirect to the dashboard
@@ -24,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Activate the first sidebar item and corresponding section by default
-    activeSidebarWithContent(0);
+    activeSidebarWithContent(1);
     
     function activeSidebarWithContent(index) {
         // Remove 'active' class from the current active sidebar item and section
@@ -74,8 +77,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // API calls for each section
-    function fetchDashboardData() {
+    async function fetchDashboardData() {
         console.log("Fetching dashboard data...");
+
+       
+
         // Add your API call for dashboard here
         // fetch('your_dashboard_api_url')
         //     .then(response => response.json())
@@ -84,8 +90,13 @@ document.addEventListener("DOMContentLoaded", () => {
         //     });
     }
 
-    function fetchOrderData() {
+    async function fetchOrderData() {
         console.log("Fetching order data...");
+        const headers = {
+            'Authorization':'Bearer '+authToken()
+        };
+        const data = await getApiCall('http://localhost:8080/api/v1/role/all',headers);
+        console.log(data);
         // Add your API call for order here
         // fetch('your_order_api_url')
         //     .then(response => response.json())

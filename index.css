@@ -18,7 +18,8 @@ body {
 
 .sidebar {
   background-color: #ffffff;
-  width: 15%;
+  max-width: 15%;
+  min-width: 15%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -91,16 +92,63 @@ body {
   flex-grow: 1;
   padding: 20px;
   background-color: #a86161;
+ 
 }
 
 .section{
-  width: 100%;
+  width: 100vh;
+  /* min-width: 100; */
   height: 100%;
   background-color: #b64d4d;
+ 
 }
 
 .hidden {
   display: none;
 }
 
+/* for order section */
+.section .order-section{
+  background-color: rebeccapurple;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
+.section .order-section .order-section1{
+  background-color: #ffffff;
+  width: 100%;
+  flex: 1;
+  
+
+ 
+}
+.order-section1 .card{
+  height: 100px;
+  background-color: red;
+  margin: 2px;
+  width: 200px;
+  
+}
+
+.section .order-section .order-section2{
+  background-color: black;
+  width: 100%;
+  flex: 1;
+
+}
+.order-section1{
+  overflow-x: scroll;
+}
+
+
+
+
+
+
+.section .order-section .order-section2{
+  background-color: #000;
+  width: 100%;
+  flex: 1;
+}
